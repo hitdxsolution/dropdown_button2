@@ -103,6 +103,7 @@ class DropdownStyleData {
     this.width,
     this.padding,
     this.scrollPadding,
+    this.margin,
     this.decoration,
     this.elevation = 8,
     this.direction = DropdownDirection.textDirection,
@@ -134,6 +135,9 @@ class DropdownStyleData {
 
   /// The inner padding of the dropdown menu including the scrollbar
   final EdgeInsetsGeometry? scrollPadding;
+
+  /// The margin of the dropdown menu
+  final EdgeInsetsGeometry? margin;
 
   /// The decoration of the dropdown menu
   final BoxDecoration? decoration;
@@ -187,6 +191,8 @@ class MenuItemStyleData {
     this.height = _kMenuItemHeight,
     this.customHeights,
     this.padding,
+    this.margin,
+    this.borderRadius,
     this.overlayColor,
     this.selectedMenuItemBuilder,
   });
@@ -199,6 +205,12 @@ class MenuItemStyleData {
 
   /// The padding of menu items
   final EdgeInsetsGeometry? padding;
+
+  /// The margin of menu items
+  final EdgeInsetsGeometry? margin;
+
+  /// The border radius of menu items
+  final BorderRadius? borderRadius;
 
   /// Defines the ink response focus, hover, and splash colors.
   ///
