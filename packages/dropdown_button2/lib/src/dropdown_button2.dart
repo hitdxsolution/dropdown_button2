@@ -1627,7 +1627,7 @@ class DropdownButton2State<T> extends State<DropdownButton2<T>>
                   : 0.0,
         ),
 
-        margin: widget.menuItemStyleData.margin,
+        // margin: widget.menuItemStyleData.margin,
         child: IndexedStack(
           index: _selectedIndex ?? hintIndex,
           alignment: widget.alignment,
