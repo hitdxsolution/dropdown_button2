@@ -10,6 +10,7 @@ class ButtonStyleData {
     this.decoration,
     this.elevation,
     this.overlayColor,
+    this.hoverColor,
   });
 
   /// The height of the button
@@ -52,6 +53,8 @@ class ButtonStyleData {
   ///    match a component's state:
   ///    <https://material.io/design/interaction/states.html#anatomy>.
   final MaterialStateProperty<Color?>? overlayColor;
+
+  final Color? hoverColor;
 }
 
 /// A class to configure the theme of the button's icon.
