@@ -10,7 +10,6 @@ class ButtonStyleData {
     this.decoration,
     this.elevation,
     this.overlayColor,
-    this.hoverColor,
   });
 
   /// The height of the button
@@ -54,7 +53,6 @@ class ButtonStyleData {
   ///    <https://material.io/design/interaction/states.html#anatomy>.
   final MaterialStateProperty<Color?>? overlayColor;
 
-  final Color? hoverColor;
 }
 
 /// A class to configure the theme of the button's icon.
@@ -198,6 +196,7 @@ class MenuItemStyleData {
     this.borderRadius,
     this.overlayColor,
     this.selectedMenuItemBuilder,
+    this.hoverColor,
   });
 
   /// The height of the menu item, default value is [kMinInteractiveDimension]
@@ -256,6 +255,8 @@ class MenuItemStyleData {
   /// },
   /// ```
   final SelectedMenuItemBuilder? selectedMenuItemBuilder;
+
+  final Color? hoverColor;
 }
 
 /// A class to configure searchable dropdowns.
