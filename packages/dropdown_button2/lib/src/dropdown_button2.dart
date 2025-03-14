@@ -229,6 +229,7 @@ class _DropdownMenuItemButtonState<T>
           onFocusChange: _handleFocusChange,
           overlayColor: menuItemStyle.overlayColor,
           borderRadius: menuItemStyle.borderRadius,
+          hoverColor: menuItemStyle.hoverColor,
           child: isSelectedItem
               ? menuItemStyle.selectedMenuItemBuilder?.call(context, child) ??
                   child
