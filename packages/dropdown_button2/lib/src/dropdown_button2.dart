@@ -621,6 +621,7 @@ class _DropdownRoute<T> extends PopupRoute<_DropdownRouteResult<T>> {
     required this.dropdownStyle,
     required this.menuItemStyle,
     required this.searchData,
+    this.scrollController,
   }) : itemHeights = menuItemStyle.customHeights ??
             List<double>.filled(items.length, menuItemStyle.height);
 
@@ -1028,6 +1029,8 @@ class DropdownButton2<T> extends StatefulWidget {
     this.barrierDismissible = true,
     this.barrierColor,
     this.barrierLabel,
+    this.scrollController,
+
     // When adding new arguments, consider adding similar arguments to
     // DropdownButtonFormField.
   })  : assert(
@@ -1055,6 +1058,7 @@ class DropdownButton2<T> extends StatefulWidget {
         _isFocused = false;
 
   DropdownButton2._formField({
+    this.scrollController,
     super.key,
     required this.items,
     this.selectedItemBuilder,
@@ -1114,6 +1118,7 @@ class DropdownButton2<T> extends StatefulWidget {
   /// then the dropdown button will be disabled, i.e. its arrow will be
   /// displayed in grey and it will not respond to input.
   final List<DropdownMenuItem<T>>? items;
+  final ScrollController? scrollController;
 
   /// A builder to customize the dropdown buttons corresponding to the
   /// [DropdownMenuItem]s in [items].
@@ -1451,6 +1456,7 @@ class DropdownButton2State<T> extends State<DropdownButton2<T>>
     assert(_dropdownRoute == null);
     _rect.value = _getRect();
     _dropdownRoute = _DropdownRoute<T>(
+      scrollController: widget.scrollController,
       items: menuItems,
       buttonRect: _rect,
       selectedIndex: _selectedIndex ?? 0,
