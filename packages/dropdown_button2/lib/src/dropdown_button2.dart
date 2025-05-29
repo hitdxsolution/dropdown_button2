@@ -1628,10 +1628,10 @@ class DropdownButton2State<T> extends State<DropdownButton2<T>>
         //from the maximum width of menu items or the hint text (width of IndexedStack).
         //We need to add MenuHorizontalPadding so menu width adapts to max items width with padding properly
         padding: EdgeInsets.symmetric(
-          horizontal:
-              _buttonStyle?.width == null && _dropdownStyle.width == null
-                  ? _getMenuHorizontalPadding()
-                  : 0.0,
+          horizontal: 0.0,
+              // _buttonStyle?.width == null && _dropdownStyle.width == null
+              //     ? _getMenuHorizontalPadding()
+              //     : 0.0,
         ),
 
         // margin: widget.menuItemStyleData.margin,
