@@ -52,7 +52,6 @@ class ButtonStyleData {
   ///    match a component's state:
   ///    <https://material.io/design/interaction/states.html#anatomy>.
   final MaterialStateProperty<Color?>? overlayColor;
-
 }
 
 /// A class to configure the theme of the button's icon.
@@ -115,6 +114,7 @@ class DropdownStyleData {
     this.useRootNavigator = false,
     this.scrollbarTheme,
     this.openInterval = const Interval(0.25, 0.5),
+    this.dividerColor,
   });
 
   /// The maximum height of the dropdown menu
@@ -183,6 +183,9 @@ class DropdownStyleData {
 
   /// The animation curve used for opening the dropdown menu (forward direction)
   final Interval openInterval;
+
+  /// Divider color
+  final Color? dividerColor;
 }
 
 /// A class to configure the theme of the dropdown menu items.
