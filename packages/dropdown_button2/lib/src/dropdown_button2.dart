@@ -669,10 +669,12 @@ class _DropdownRoute<T> extends PopupRoute<_DropdownRouteResult<T>> {
   }
 
   double getItemOffset(int index, double paddingTop) {
+    final double itemPadding = dropdownStyle.padding?.vertical ?? 0;
     double offset = paddingTop;
+
     if (items.isNotEmpty && index > 0) {
       assert(items.length == itemHeights.length);
-      offset += itemHeights.sublist(0, index).reduce((double total, double height) => total + height + 12);
+      offset += itemHeights.sublist(0, index).reduce((double total, double height) => total + height + itemPadding);
     }
     return offset;
   }
