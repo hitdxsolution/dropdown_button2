@@ -172,6 +172,8 @@ class _DropdownMenuItemButtonState<T> extends State<_DropdownMenuItemButton<T>> 
 
   MenuItemStyleData get menuItemStyle => widget.route.menuItemStyle;
 
+  DropdownStyleData get dropdownStyle => widget.route.dropdownStyle;
+
   @override
   Widget build(BuildContext context) {
     final double menuCurveEnd = widget.route.dropdownStyle.openInterval.end;
@@ -192,7 +194,7 @@ class _DropdownMenuItemButtonState<T> extends State<_DropdownMenuItemButton<T>> 
     if (dropdownMenuItem.enabled) {
       final bool isSelectedItem = !widget.route.isNoSelectedItem && widget.itemIndex == widget.route.selectedIndex;
       child = Container(
-        margin: (menuItemStyle.margin ?? _kMenuItemMargin).resolve(widget.textDirection),
+        margin: dropdownStyle.padding ?? kMaterialListPadding,
         decoration: BoxDecoration(
           borderRadius: menuItemStyle.borderRadius,
         ),
@@ -308,18 +310,26 @@ class _DropdownMenuState<T> extends State<_DropdownMenu<T>> {
 
   List<Widget> _getSearchItems() {
     final String currentSearch = searchData!.searchController!.text;
+
     return <Widget>[
       for (int index = 0; index < widget.route.items.length; ++index)
         if (_searchMatchFn(widget.route.items[index].item!, currentSearch))
-          _DropdownMenuItemButton<T>(
-            route: widget.route,
-            textDirection: widget.textDirection,
-            buttonRect: widget.buttonRect,
-            constraints: widget.constraints,
-            mediaQueryPadding: widget.mediaQueryPadding,
-            itemIndex: index,
-            enableFeedback: widget.enableFeedback,
-          ),
+          if (widget.route.items[index].item?.isDivider ?? false) ...[
+            Container(
+              height: 1,
+              color: dropdownStyle.dividerColor,
+            ),
+          ] else ...[
+            _DropdownMenuItemButton<T>(
+              route: widget.route,
+              textDirection: widget.textDirection,
+              buttonRect: widget.buttonRect,
+              constraints: widget.constraints,
+              mediaQueryPadding: widget.mediaQueryPadding,
+              itemIndex: index,
+              enableFeedback: widget.enableFeedback,
+            ),
+          ],
     ];
   }
 
@@ -351,7 +361,8 @@ class _DropdownMenuState<T> extends State<_DropdownMenu<T>> {
           child: ListView(
             // Ensure this always inherits the PrimaryScrollController
             primary: true,
-            padding: dropdownStyle.padding ?? kMaterialListPadding,
+            // padding: dropdownStyle.padding ?? kMaterialListPadding,
+            padding: EdgeInsets.zero,
             shrinkWrap: true,
             children: _children,
           ),
@@ -369,7 +380,8 @@ class _DropdownMenuState<T> extends State<_DropdownMenu<T>> {
           child: ListView(
             // Ensure this always inherits the PrimaryScrollController
             primary: true,
-            padding: dropdownStyle.padding ?? kMaterialListPadding,
+            padding: EdgeInsets.zero,
+            // padding: dropdownStyle.padding ?? kMaterialListPadding,
             shrinkWrap: true,
             children: _children,
           ),
@@ -684,7 +696,9 @@ class _DropdownRoute<T> extends PopupRoute<_DropdownRouteResult<T>> {
     final double innerWidgetHeight = searchData?.searchInnerWidgetHeight ?? 0.0;
     actualMenuHeight += innerWidgetHeight;
     if (items.isNotEmpty) {
-      actualMenuHeight += itemHeights.reduce((double total, double height) => total + height);
+      actualMenuHeight += itemHeights.reduce((double total, double height) {
+        return total + height + actualMenuHeight;
+      });
     }
 
     // Use actualMenuHeight if it's less than maxHeight.
