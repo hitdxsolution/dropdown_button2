@@ -851,7 +851,7 @@ class CustomDropdownMenuItem<T> extends DropdownMenuItem<T> {
     super.value,
     super.enabled,
     super.alignment,
-    required super.child,
+    super.child = const SizedBox.shrink(),
     this.isDivider = false,
   });
 
