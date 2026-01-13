@@ -194,7 +194,7 @@ class _DropdownMenuItemButtonState<T> extends State<_DropdownMenuItemButton<T>> 
     if (dropdownMenuItem.enabled) {
       final bool isSelectedItem = !widget.route.isNoSelectedItem && widget.itemIndex == widget.route.selectedIndex;
       child = Container(
-        margin: dropdownStyle.padding ?? kMaterialListPadding,
+        margin: menuItemStyle.margin ?? kMaterialListPadding,
         decoration: BoxDecoration(
           borderRadius: menuItemStyle.borderRadius,
         ),
@@ -361,8 +361,7 @@ class _DropdownMenuState<T> extends State<_DropdownMenu<T>> {
           child: ListView(
             // Ensure this always inherits the PrimaryScrollController
             primary: true,
-            // padding: dropdownStyle.padding ?? kMaterialListPadding,
-            padding: EdgeInsets.zero,
+            padding: dropdownStyle.padding ?? kMaterialListPadding,
             shrinkWrap: true,
             children: _children,
           ),
@@ -380,8 +379,7 @@ class _DropdownMenuState<T> extends State<_DropdownMenu<T>> {
           child: ListView(
             // Ensure this always inherits the PrimaryScrollController
             primary: true,
-            padding: EdgeInsets.zero,
-            // padding: dropdownStyle.padding ?? kMaterialListPadding,
+            padding: dropdownStyle.padding ?? kMaterialListPadding,
             shrinkWrap: true,
             children: _children,
           ),
@@ -669,12 +667,10 @@ class _DropdownRoute<T> extends PopupRoute<_DropdownRouteResult<T>> {
   }
 
   double getItemOffset(int index, double paddingTop) {
-    final double itemPadding = dropdownStyle.padding?.vertical ?? 0;
     double offset = paddingTop;
-
     if (items.isNotEmpty && index > 0) {
       assert(items.length == itemHeights.length);
-      offset += itemHeights.sublist(0, index).reduce((double total, double height) => total + height + itemPadding);
+      offset += itemHeights.sublist(0, index).reduce((double total, double height) => total + height);
     }
     return offset;
   }
@@ -699,7 +695,7 @@ class _DropdownRoute<T> extends PopupRoute<_DropdownRouteResult<T>> {
     actualMenuHeight += innerWidgetHeight;
     if (items.isNotEmpty) {
       actualMenuHeight += itemHeights.reduce((double total, double height) {
-        return total + height + actualMenuHeight;
+        return total + height;
       });
     }
 
