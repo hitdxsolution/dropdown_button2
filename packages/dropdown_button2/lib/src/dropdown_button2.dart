@@ -280,6 +280,7 @@ class _DropdownMenuState<T> extends State<_DropdownMenu<T>> {
           if (widget.route.items[index].item?.isDivider ?? false) ...[
             Container(
               height: 1,
+              margin: const EdgeInsets.symmetric(vertical: 6.0),
               color: dropdownStyle.dividerColor,
             ),
           ] else ...[
@@ -317,6 +318,7 @@ class _DropdownMenuState<T> extends State<_DropdownMenu<T>> {
           if (widget.route.items[index].item?.isDivider ?? false) ...[
             Container(
               height: 1,
+              margin: const EdgeInsets.symmetric(vertical: 6.0),
               color: dropdownStyle.dividerColor,
             ),
           ] else ...[
